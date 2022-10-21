@@ -1,0 +1,11 @@
+[Unit]
+Description=SQS-SMS
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/local/bin/sms-sqs
+
+[Install]
+WantedBy=multi-user.target

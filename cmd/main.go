@@ -13,7 +13,8 @@ var Logger *logrus.Logger = createLogger()
 func main() {
 	Logger.Println("Run every 5 seconds")
 
-	_ = godotenv.Load(".env", "/etc/sms-sqs.conf")
+	godotenv.Load(".env")
+	godotenv.Load("/etc/sms-sqs.conf")
 
 	scheduler := gocron.NewScheduler(time.UTC)
 	_, err := scheduler.Every(5).SingletonMode().Do(fire)
