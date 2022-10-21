@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/go-co-op/gocron"
-	_ "github.com/joho/godotenv/autoload"
+	"github.com/joho/godotenv"
 	"github.com/sirupsen/logrus"
 	"github.com/unk2k/orange-pi-i96-send-sms-from-sqs/internal"
 	"time"
@@ -12,6 +12,9 @@ var Logger *logrus.Logger = createLogger()
 
 func main() {
 	Logger.Println("Run every 5 seconds")
+
+	_ = godotenv.Load(".env", "/etc/sms-sqs.conf")
+
 	scheduler := gocron.NewScheduler(time.UTC)
 	_, err := scheduler.Every(5).SingletonMode().Do(fire)
 	if err != nil {
